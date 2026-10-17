@@ -1,0 +1,26 @@
+{
+  "name": "solar-ops",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c yellow,cyan \"npm run start -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm run build && npm run start -w server",
+    "seed": "npm run seed -w server",
+    "test": "npm test -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "downloadDir": "node_modules/.cache/mongodb-memory-server"
+    }
+  }
+}
